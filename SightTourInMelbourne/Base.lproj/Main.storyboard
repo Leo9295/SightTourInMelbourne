@@ -62,21 +62,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="SightViewCell" rowHeight="100" id="cNH-c9-z6n" customClass="SightTableViewCell" customModule="SightTourInMelbourne" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="SightViewCell" rowHeight="100" id="cNH-c9-z6n" customClass="SightTableViewCell" customModule="SightTourInMelbourne" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cNH-c9-z6n" id="B3g-jS-6gB">
-                                    <rect key="frame" x="0.0" y="0.0" width="362" height="99.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Met-fJ-FOO">
-                                            <rect key="frame" x="110" y="16" width="228" height="23"/>
+                                            <rect key="frame" x="110" y="16" width="208" height="23"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Desc Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JyR-82-OT9">
-                                            <rect key="frame" x="110" y="44" width="228" height="45"/>
+                                            <rect key="frame" x="110" y="44" width="208" height="45"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -103,8 +103,9 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="sightDescLabel" destination="JyR-82-OT9" id="uQF-UK-bk4"/>
+                                    <outlet property="sightIconImage" destination="djF-I7-bHe" id="Frt-ps-5Oj"/>
                                     <outlet property="sightNameLabel" destination="Met-fJ-FOO" id="xXp-dN-qnU"/>
-                                    <segue destination="bYm-lq-cXY" kind="push" id="xMx-am-m9x"/>
+                                    <segue destination="bYm-lq-cXY" kind="push" identifier="ShowDetailView" id="xMx-am-m9x"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

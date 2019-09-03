@@ -16,12 +16,6 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         // Get the database controller once from the App Delegate
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -38,8 +32,8 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         databaseController?.removeListener(listener: self)
     }
     
-    func onTypeChange(change: DatabaseChange, typeSights: [Sight]) {
-        // Leave it blank
+    func onPhotoChange(change: DatabaseChange, photo: PhotoOfSight) {
+        // Leave it Blank
     }
     
     func onSightListChange(change: DatabaseChange, sights: [Sight]) {
@@ -63,6 +57,18 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         
         cell.sightNameLabel.text = currentSightList[indexPath.row].sightName
         cell.sightDescLabel.text = currentSightList[indexPath.row].sightDesc
+        switch currentSightList[indexPath.row].sightType {
+        case "Museum":
+            cell.sightIconImage.image = UIImage(named: "museum")
+        case "Architecture":
+            cell.sightIconImage.image = UIImage(named: "architecture")
+        case "Art":
+            cell.sightIconImage.image = UIImage(named: "art")
+        case "Histroy":
+            cell.sightIconImage.image = UIImage(named: "history")
+        default:
+            cell.sightIconImage.image = UIImage(named: "other")
+        }
 //        cell.sightNameLabel.text = currentSightList[indexPath.row].sightName
 //        cell.sightDescLabel.text = currentSightList[indexPath.row].sightDesc
 
@@ -71,42 +77,43 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        chooseAlertView(indexPath: indexPath)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    // Cited from: https://www.jianshu.com/p/2374436d565c
+    func chooseAlertView(indexPath: IndexPath){
+        let alertController = UIAlertController(title: "Any Options?", message: "", preferredStyle: UIAlertController.Style.alert)
+        let showOnMapAction = UIAlertAction(title: "Show On Map", style: UIAlertAction.Style.default) {
+            (_) in
+            self.jumpToMap(indexPath: indexPath)
+            
+        }
+        let showDetailAction = UIAlertAction(title: "Show Details", style: UIAlertAction.Style.default) {
+            (_) in
+            self.showCurrentRowDetail(indexPath: indexPath)
+            
+        }
+        alertController.addAction(showOnMapAction)
+        alertController.addAction(showDetailAction)
+        self.present(alertController, animated: true, completion: nil)
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    func jumpToMap(indexPath: IndexPath) {
+//        self.tableView!.deselectRow(at: indexPath, animated: true)
+//        let selectedSight = self.currentSightList[indexPath.row]
+//
+//        self.performSegue(withIdentifier: "ViewListSegue", sender: selectedSight)
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    func showCurrentRowDetail(indexPath: IndexPath) {
+        self.tableView!.deselectRow(at: indexPath, animated: true)
+        let selectedSight = self.currentSightList[indexPath.row]
+        
+        self.performSegue(withIdentifier: "ShowDetailView", sender: selectedSight)
     }
-    */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -114,7 +121,7 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100

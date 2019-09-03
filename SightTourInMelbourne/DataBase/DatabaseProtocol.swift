@@ -15,28 +15,27 @@ enum DatabaseChange {
 }
 
 enum ListenerType {
-    case type
+    case photo
     case sights
     case all
 }
 
 protocol DatabaseListener: AnyObject {
     var listenerType: ListenerType {get set}
-    func onTypeChange(change: DatabaseChange, typeSights: [Sight])
     func onSightListChange(change: DatabaseChange, sights: [Sight])
+    func onPhotoChange(change: DatabaseChange, photo: PhotoOfSight)
 }
 
 protocol DatabaseProtocol: AnyObject {
-    var defaultType: Type {get}
     
-//    func addSight(newSight: Sight) -> Sight
-    func addSight(sightName: String, sightDesc: String, longitude: Double, latitude: Double) -> Sight
+    func addSight(sightName: String, sightDesc: String, latitude: Double, longitude: Double, sightType: String) -> Sight
     func deleteSight(delSight: Sight)
     func updateSight(updateSight: Sight) -> Sight
-    func addType(typeName: String) -> Type
     
-    func addSightToType(sight: Sight, type: Type)
-    func removeSightFromType(sight: Sight, type: Type)
+    func addPhoto(photoName: String)
+    
+    func addPhotoToSight(sight: Sight, photo: PhotoOfSight)
+    func removePhotoFromSight(sight: Sight)
     
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)

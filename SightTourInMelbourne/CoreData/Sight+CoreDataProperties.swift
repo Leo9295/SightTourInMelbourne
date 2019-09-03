@@ -2,7 +2,7 @@
 //  Sight+CoreDataProperties.swift
 //  SightTourInMelbourne
 //
-//  Created by Leo Mingzhe on 3/9/19.
+//  Created by Leo Mingzhe on 4/9/19.
 //  Copyright © 2019 Leo Mingzhe. All rights reserved.
 //
 //
@@ -17,11 +17,11 @@ extension Sight {
         return NSFetchRequest<Sight>(entityName: "Sight")
     }
 
-    @NSManaged public var sightName: String? 
+    @NSManaged public var sightName: String?
     @NSManaged public var sightDesc: String?
     @NSManaged public var longitude: Double
     @NSManaged public var latitude: Double
-    @NSManaged public var photoFile: String?
-    @NSManaged public var belongTo: Type?
+    @NSManaged public var sightType: String?
+    @NSManaged public var havePhoto: PhotoOfSight?
 
 }

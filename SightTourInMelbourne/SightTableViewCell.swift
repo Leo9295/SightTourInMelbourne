@@ -12,6 +12,7 @@ class SightTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sightNameLabel: UILabel!
     @IBOutlet weak var sightDescLabel: UILabel!
+    @IBOutlet weak var sightIconImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

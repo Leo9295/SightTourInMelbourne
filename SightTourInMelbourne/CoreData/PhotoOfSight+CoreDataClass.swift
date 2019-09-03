@@ -1,5 +1,5 @@
 //
-//  Sight+CoreDataClass.swift
+//  PhotoOfSight+CoreDataClass.swift
 //  SightTourInMelbourne
 //
 //  Created by Leo Mingzhe on 4/9/19.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Sight)
-public class Sight: NSManagedObject {
+@objc(PhotoOfSight)
+public class PhotoOfSight: NSManagedObject {
 
 }
