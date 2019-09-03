@@ -8,15 +8,27 @@
 
 import UIKit
 import CoreData
+import CoreLocation
+import MapKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+    var databaseController: DatabaseProtocol?
+    var centralLocation: LocationAnnotation = LocationAnnotation(newTitle: "CBD", newSubTitle: "", longitude: 144.9636478, latitude: -37.8150783)
+    var locationManager: CLLocationManager = CLLocationManager()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        databaseController = CoreDataController()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 10
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        
         return true
     }
 
