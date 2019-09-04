@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     var window: UIWindow?
     var databaseController: DatabaseProtocol?
-    var centralLocation: LocationAnnotation = LocationAnnotation(newTitle: "CBD", newSubTitle: "", longitude: 144.9636478, latitude: -37.8150783)
+    var centralLocation =  LocationAnnotation(newTitle: "CBD", newSubTitle: "", latitude: -37.8150783, longitude: 144.9636478)
     var locationManager: CLLocationManager = CLLocationManager()
 
 

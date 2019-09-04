@@ -9,7 +9,13 @@
 import UIKit
 
 class AddSightViewController: UIViewController {
-
+    
+    @IBOutlet weak var sightNameTextField: UITextField!
+    @IBOutlet weak var sightDescTextField: UITextField!
+    @IBOutlet weak var sightTypeSegment: UISegmentedControl!
+    @IBOutlet weak var sightAddressTextField: UITextField!
+    @IBOutlet weak var sightPhotoImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,5 +36,8 @@ class AddSightViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func takePhotoButton(_ sender: Any) {
+        
+    }
+    
 }

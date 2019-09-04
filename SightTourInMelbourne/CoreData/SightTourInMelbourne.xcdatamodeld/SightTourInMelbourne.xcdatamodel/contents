@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G87" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="PhotoOfSight" representedClassName="PhotoOfSight" syncable="YES">
-        <attribute name="filenameOfPhoto" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="belongToSight" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sight" inverseName="havePhoto" inverseEntity="Sight" syncable="YES"/>
-    </entity>
     <entity name="Sight" representedClassName="Sight" syncable="YES">
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sightDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sightLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sightLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sightName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sightPhotoFileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sightType" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="havePhoto" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoOfSight" inverseName="belongToSight" inverseEntity="PhotoOfSight" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Sight" positionX="-63" positionY="-18" width="128" height="133"/>
-        <element name="PhotoOfSight" positionX="180.9140625" positionY="42.64453125" width="128" height="73"/>
+        <element name="Sight" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

@@ -16,7 +16,6 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     
     // Results
     var allSightsFetchedResultsController: NSFetchedResultsController<Sight>?
-    var typeSightsFetchedResultsController: NSFetchedResultsController<Sight>?
 
     override init() {
         persistantContainer = NSPersistentContainer(name: "SightTourInMelbourne")
@@ -45,15 +44,14 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         }
     }
     
-    func addSight(sightName: String, sightDesc: String, latitude: Double, longitude: Double, sightType: String) -> Sight {
+    func addSight(sightName: String, sightDesc: String, latitude: Double, longitude: Double, sightType: String) {
         let sight = NSEntityDescription.insertNewObject(forEntityName: "Sight", into: persistantContainer.viewContext) as! Sight
         sight.sightName = sightName
         sight.sightDesc = sightDesc
-        sight.latitude = latitude
-        sight.longitude = longitude
+        sight.sightLatitude = latitude
+        sight.sightLongitude = longitude
         sight.sightType = sightType
         saveContext()
-        return sight
     }
     
     func deleteSight(delSight: Sight) {
@@ -61,38 +59,52 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         saveContext()
     }
     
-    func updateSight(updateSight: Sight) -> Sight {
-        // leave it blank
-        let sight: Sight = Sight()
-        return sight
-    }
-    
-    func addPhoto(photoName: String) {
-        let photo = NSEntityDescription.insertNewObject(forEntityName: "PhotoOfSight", into: persistantContainer.viewContext) as! PhotoOfSight
-        photo.filenameOfPhoto = photoName
+    // Cited from: http://stackoverflow.com/questions/26345189/how-to-update-a-coredata-entry-that-has-already-been-saved-in-swift
+    func updateSight(updateSight: Sight) {
+        let fetchRequest: NSFetchRequest<Sight> = Sight.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "sightName = %@", (updateSight.sightName)!)
+        
+        do{
+            let results = try persistantContainer.viewContext.fetch(fetchRequest)
+            if results.count != 0 {
+                results[0].setValue(updateSight.sightName, forKey: "sightName")
+                results[0].setValue(updateSight.sightDesc, forKey: "sigthDesc")
+                results[0].setValue(updateSight.sightType, forKey: "sightType")
+                results[0].setValue(updateSight.sightLatitude, forKey: "sightLatitude")
+                results[0].setValue(updateSight.sightLongitude, forKey: "sightLongitude")
+                results[0].setValue(updateSight.sightPhotoFileName, forKey: "sightPhotoFileName")
+            }
+        } catch {
+            print("Update Sight information failed: \(error)")
+        }
         saveContext()
     }
     
-    func addPhotoToSight(sight: Sight, photo: PhotoOfSight) {
-        sight.havePhoto = photo
-        saveContext()
-    }
-    
-    func removePhotoFromSight(sight: Sight) {
-        sight.havePhoto = PhotoOfSight()
-        saveContext()
+    // Cited from: https://medium.com/@ankurvekariya/core-data-crud-with-swift-4-2-for-beginners-40efe4e7d1cc
+    func fetchSightWithName(fetchedSightName: String) -> Sight? {
+        let fetchRequest: NSFetchRequest<Sight> = Sight.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "sightName = %@", fetchedSightName)
+        
+        do {
+            let results = try persistantContainer.viewContext.fetch(fetchRequest)
+            if results.count != 0 {
+                return results[0]
+            } else {
+                return nil
+            }
+        } catch {
+            print("Searching Sight failed: \(error)")
+        }
+        return nil
     }
     
     func addListener(listener: DatabaseListener) {
         listeners.addDelegate(listener)
         
-        if listener.listenerType == ListenerType.sights || listener.listenerType == ListenerType.all {
+        if listener.listenerType == ListenerType.sight || listener.listenerType == ListenerType.all {
             listener.onSightListChange(change: .update, sights: fetchAllSights())
         }
         
-        if listener.listenerType == ListenerType.photo || listener.listenerType == ListenerType.all {
-            listener.onPhotoChange(change: .update, photo: fetchPhotoOfSight())
-        }
     }
     
     func removeListener(listener: DatabaseListener) {
@@ -122,47 +134,16 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         return sights
     }
     
-    func fetchPhotoOfSight() -> PhotoOfSight {
-        if typeSightsFetchedResultsController == nil {
-            let fetchRequest: NSFetchRequest<Sight> = Sight.fetchRequest()
-            let nameSortDescriptor = NSSortDescriptor(key: "sightName", ascending: true)
-            fetchRequest.sortDescriptors = [nameSortDescriptor]
-            let predicate = NSPredicate(format: "ANY havePhoto.fileNameOfPhoto == %@")
-            fetchRequest.predicate = predicate
-            typeSightsFetchedResultsController = NSFetchedResultsController<Sight>(fetchRequest: fetchRequest, managedObjectContext: persistantContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-            typeSightsFetchedResultsController?.delegate = self
-            
-            do {
-                try typeSightsFetchedResultsController?.performFetch()
-            } catch {
-                print("Fetch Request failed: \(error)")
-            }
-        }
-        
-        var photo = PhotoOfSight()
-        if typeSightsFetchedResultsController?.fetchedObjects != nil {
-            photo = (typeSightsFetchedResultsController?.fetchedObjects?.first?.havePhoto)!
-        }
-        
-        return photo
-    }
-    
     // MARK: - Fetched Results Controller Delegate
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if controller == allSightsFetchedResultsController {
             listeners.invoke { (listener) in
-                if listener.listenerType == ListenerType.sights || listener.listenerType == ListenerType.all {
+                if listener.listenerType == ListenerType.sight || listener.listenerType == ListenerType.all {
                     listener.onSightListChange(change: .update, sights: fetchAllSights())
                 }
             }
-        } else if controller == typeSightsFetchedResultsController {
-            listeners.invoke { (listener) in
-                if listener.listenerType == ListenerType.photo || listener.listenerType == ListenerType.all {
-                    listener.onPhotoChange(change: .update, photo: fetchPhotoOfSight())
-                }
-            }
-        }
+        } 
     }
     
     // MARK: - Default entries

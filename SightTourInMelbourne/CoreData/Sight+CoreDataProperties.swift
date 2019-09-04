@@ -19,9 +19,9 @@ extension Sight {
 
     @NSManaged public var sightName: String?
     @NSManaged public var sightDesc: String?
-    @NSManaged public var longitude: Double
-    @NSManaged public var latitude: Double
+    @NSManaged public var sightLatitude: Double
+    @NSManaged public var sightLongitude: Double
+    @NSManaged public var sightPhotoFileName: String?
     @NSManaged public var sightType: String?
-    @NSManaged public var havePhoto: PhotoOfSight?
 
 }

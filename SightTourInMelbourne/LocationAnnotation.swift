@@ -14,7 +14,7 @@ class LocationAnnotation: NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     
-    init(newTitle: String, newSubTitle: String, longitude: Double, latitude: Double){
+    init(newTitle: String, newSubTitle: String, latitude: Double, longitude: Double){
         self.title = newTitle
         self.subtitle = newSubTitle
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

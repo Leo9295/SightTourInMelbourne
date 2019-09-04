@@ -12,7 +12,7 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
     
     var currentSightList: [Sight] = []
     weak var databaseController: DatabaseProtocol?
-    var listenerType = ListenerType.sights
+    var listenerType = ListenerType.sight
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +32,9 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         databaseController?.removeListener(listener: self)
     }
     
-    func onPhotoChange(change: DatabaseChange, photo: PhotoOfSight) {
-        // Leave it Blank
-    }
-    
     func onSightListChange(change: DatabaseChange, sights: [Sight]) {
         currentSightList = sights
     }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -81,6 +76,17 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         chooseAlertView(indexPath: indexPath)
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            databaseController?.deleteSight(delSight: currentSightList[indexPath.row])
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     // Cited from: https://www.jianshu.com/p/2374436d565c
     func chooseAlertView(indexPath: IndexPath){
         let alertController = UIAlertController(title: "Any Options?", message: "", preferredStyle: UIAlertController.Style.alert)
@@ -110,7 +116,7 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         self.tableView!.deselectRow(at: indexPath, animated: true)
         let selectedSight = self.currentSightList[indexPath.row]
         
-        self.performSegue(withIdentifier: "ShowDetailView", sender: selectedSight)
+        self.performSegue(withIdentifier: "ShowDetailViewSegue", sender: selectedSight)
     }
 
     
@@ -120,6 +126,10 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowDetailViewSegue" {
+            let controller = segue.destination as! DetailSightViewController
+            controller.selectedSight = sender as? Sight
+        }
     }
     
     
