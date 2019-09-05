@@ -13,6 +13,8 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
     var currentSightList: [Sight] = []
     weak var databaseController: DatabaseProtocol?
     var listenerType = ListenerType.sight
+    
+    weak var focusSightDelegate: FocusSightDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +86,7 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         if (editingStyle == .delete) {
             databaseController?.deleteSight(delSight: currentSightList[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+        } 
     }
     
     // Cited from: https://www.jianshu.com/p/2374436d565c
@@ -92,7 +94,7 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         let alertController = UIAlertController(title: "Any Options?", message: "", preferredStyle: UIAlertController.Style.alert)
         let showOnMapAction = UIAlertAction(title: "Show On Map", style: UIAlertAction.Style.default) {
             (_) in
-            self.jumpToMap(indexPath: indexPath)
+            self.jumpToMap(index: indexPath.row)
             
         }
         let showDetailAction = UIAlertAction(title: "Show Details", style: UIAlertAction.Style.default) {
@@ -105,11 +107,9 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func jumpToMap(indexPath: IndexPath) {
-//        self.tableView!.deselectRow(at: indexPath, animated: true)
-//        let selectedSight = self.currentSightList[indexPath.row]
-//
-//        self.performSegue(withIdentifier: "ViewListSegue", sender: selectedSight)
+    func jumpToMap(index: Int) {
+        focusSightDelegate?.focusOn(index: index)
+        navigationController?.popViewController(animated: true)
     }
     
     func showCurrentRowDetail(indexPath: IndexPath) {
@@ -129,10 +129,17 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         if segue.identifier == "ShowDetailViewSegue" {
             let controller = segue.destination as! DetailSightViewController
             controller.selectedSight = sender as? Sight
+        } else if segue.identifier == "ViewListSegue" {
+            
         }
     }
     
+    @IBAction func cancel(_ unwindSegue: UIStoryboardSegue) {}
     
+    @IBAction func save(_ unwindSegue: UIStoryboardSegue) {
+        
+    }
+        
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }

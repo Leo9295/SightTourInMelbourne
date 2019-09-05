@@ -10,33 +10,66 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class DetailSightViewController: UIViewController {
+class DetailSightViewController: UIViewController, DatabaseListener {
+    
+    var listenerType = ListenerType.sight
     
     @IBOutlet weak var sightNameLabel: UILabel!
     @IBOutlet weak var sightDescLabel: UILabel!
     @IBOutlet weak var sightTypeLabel: UILabel!
     @IBOutlet weak var detailMapView: MKMapView!
+    @IBOutlet weak var sightTypeImageView: UIImageView!
+    @IBOutlet weak var sightPhotoImageView: UIImageView!
     
+    weak var databaseController: DatabaseProtocol?
     var selectedSight: Sight?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func onSightListChange(change: DatabaseChange, sights: [Sight]) {
+        // Leave it Blank
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+        self.sightPhotoImageView.image = loadImageData(fileName: selectedSight!.sightPhotoFileName!)
         self.sightNameLabel.text = selectedSight?.sightName
         self.sightDescLabel.text = selectedSight?.sightDesc
         self.sightTypeLabel.text = selectedSight?.sightType
         let location = LocationAnnotation(newTitle: selectedSight!.sightName!, newSubTitle: "", latitude: selectedSight!.sightLatitude, longitude: selectedSight!.sightLongitude)
         foucsOn(annotation: location)
+        switch selectedSight?.sightType {
+        case "Museum":
+            sightTypeImageView.image = UIImage(named: "museum")
+        case "Architecture":
+            sightTypeImageView.image = UIImage(named: "architecture")
+        case "Art":
+            sightTypeImageView.image = UIImage(named: "art")
+        case "Histroy":
+            sightTypeImageView.image = UIImage(named: "history")
+        default:
+            sightTypeImageView.image = UIImage(named: "other")
+        }
         detailMapView.addAnnotation(location)
-//        let address = convertLatAndLonToAddress(lat: selectedSight!.sightLatitude, lon: selectedSight!.sightLongitude)
-//        self.sightAddressLabel.text = address
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
     }
     
     @IBAction func cancel(_ unwindSegue: UIStoryboardSegue) {}
     
     @IBAction func save(_ unwindSegue: UIStoryboardSegue) {
-        
+        if let editSightViewChontroller = unwindSegue.source as? EditSightViewController {
+            databaseController?.deleteSight(delSight: selectedSight!)
+            databaseController?.addSight(sightName: editSightViewChontroller.editedSight!.sightName!, sightDesc: editSightViewChontroller.editedSight!.sightDesc!, latitude: editSightViewChontroller.editedSight!.sightLatitude, longitude: editSightViewChontroller.editedSight!.sightLongitude, sightType: editSightViewChontroller.editedSight!.sightType!, image: editSightViewChontroller.sightImage!)
+        }
     }
     // MARK: - Navigation
 
@@ -44,10 +77,6 @@ class DetailSightViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-//        if segue.identifier == "EditDetailSegue" {
-//            let controller = segue.destination as! EditSightViewController
-//            controller.editingSight = sender as? Sight
-//        }
         if let navigationController = segue.destination as? UINavigationController {
             let editSightViewController = navigationController.viewControllers.first as? EditSightViewController
             editSightViewController?.editingSight = selectedSight
@@ -61,20 +90,29 @@ class DetailSightViewController: UIViewController {
         detailMapView.setRegion(detailMapView.regionThatFits(zoomRegion), animated: true)
     }
     
-//    func convertLatAndLonToAddress(lat: Double, lon: Double) -> String {
-//        var address: String = ""
-//        let geoCoder = CLGeocoder()
-//        let location = CLLocation(latitude: lat, longitude: lon)
-//        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-//            var placeMark: CLPlacemark!
-//            placeMark = placemarks?[0]
-//
-//            if let street = placeMark.thoroughfare {
-//                print(street)
-//                address = street
-//            }
-//        })
-//        return address
-//    }
+    func loadImageData(fileName: String) -> UIImage? {
+        var image: UIImage?
+        if isPurnInt(string: fileName) {
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+            let url = NSURL(fileURLWithPath: path)
+            
+            if let pathComponent = url.appendingPathComponent(fileName) {
+                let filePath = pathComponent.path
+                let fileManager = FileManager.default
+                let fileData = fileManager.contents(atPath: filePath)
+                image = UIImage(data: fileData!)
+            }
+        } else {
+            image = UIImage(named: fileName)
+        }
+        return image
+    }
+    
+    // Cited from: https://blog.csdn.net/hengyunbin/article/details/85260760
+    func isPurnInt(string: String) -> Bool {
+        let scan: Scanner = Scanner(string: string)
+        var val:Int = 0
+        return scan.scanInt(&val) && scan.isAtEnd
+    }
 
 }

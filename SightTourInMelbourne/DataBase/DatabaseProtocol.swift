@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum DatabaseChange {
     case add
@@ -26,9 +27,8 @@ protocol DatabaseListener: AnyObject {
 
 protocol DatabaseProtocol: AnyObject {
     
-    func addSight(sightName: String, sightDesc: String, latitude: Double, longitude: Double, sightType: String)
+    func addSight(sightName: String, sightDesc: String, latitude: Double, longitude: Double, sightType: String, image: UIImage)
     func deleteSight(delSight: Sight)
-    func updateSight(updateSight: Sight)
     func fetchSightWithName(fetchedSightName: String) -> Sight?
     
     func addListener(listener: DatabaseListener)

@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D74162FB2321A9AF00425049 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74162F82321A9AF00425049 /* MulticastDelegate.swift */; };
+		D74162FC2321A9AF00425049 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74162F92321A9AF00425049 /* CoreDataController.swift */; };
+		D74162FD2321A9AF00425049 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74162FA2321A9AF00425049 /* DatabaseProtocol.swift */; };
 		D7837CF0231E8FF200B6926C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837CEF231E8FF200B6926C /* AppDelegate.swift */; };
 		D7837CF5231E8FF200B6926C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7837CF3231E8FF200B6926C /* Main.storyboard */; };
 		D7837CFD231E8FF300B6926C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7837CFB231E8FF300B6926C /* LaunchScreen.storyboard */; };
-		D7837D0F231E95B500B6926C /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D0E231E95B500B6926C /* DatabaseProtocol.swift */; };
-		D7837D11231E9BC200B6926C /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D10231E9BC200B6926C /* CoreDataController.swift */; };
-		D7837D13231EA1B700B6926C /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D12231EA1B700B6926C /* MulticastDelegate.swift */; };
 		D7837D15231EC15C00B6926C /* AllSightsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D14231EC15C00B6926C /* AllSightsTableViewController.swift */; };
 		D7837D17231EC17D00B6926C /* SightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D16231EC17D00B6926C /* SightTableViewCell.swift */; };
 		D7837D19231ED32400B6926C /* SightMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D18231ED32400B6926C /* SightMapViewController.swift */; };
@@ -21,6 +21,8 @@
 		D7837D1F231ED3F100B6926C /* DetailSightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D1E231ED3F100B6926C /* DetailSightViewController.swift */; };
 		D7837D21231ED68300B6926C /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D20231ED68300B6926C /* LocationAnnotation.swift */; };
 		D7837D23231EDC9700B6926C /* SetPictureForSightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7837D22231EDC9700B6926C /* SetPictureForSightViewController.swift */; };
+		D7966D35232110B800B99F73 /* FocusSightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7966D34232110B800B99F73 /* FocusSightDelegate.swift */; };
+		D7966D3723213D7500B99F73 /* SightChangeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7966D3623213D7500B99F73 /* SightChangeDelegate.swift */; };
 		D7E33244231FC75D0080801A /* SightTourInMelbourne.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D7E33242231FC75D0080801A /* SightTourInMelbourne.xcdatamodeld */; };
 		D7E33247231FC7F80080801A /* Sight+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E33245231FC7F80080801A /* Sight+CoreDataClass.swift */; };
 		D7E33248231FC7F80080801A /* Sight+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E33246231FC7F80080801A /* Sight+CoreDataProperties.swift */; };
@@ -28,14 +30,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D74162F82321A9AF00425049 /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		D74162F92321A9AF00425049 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		D74162FA2321A9AF00425049 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		D7837CEC231E8FF200B6926C /* SightTourInMelbourne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SightTourInMelbourne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7837CEF231E8FF200B6926C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7837CF4231E8FF200B6926C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D7837CFC231E8FF300B6926C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7837CFE231E8FF300B6926C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D7837D0E231E95B500B6926C /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
-		D7837D10231E9BC200B6926C /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
-		D7837D12231EA1B700B6926C /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		D7837D14231EC15C00B6926C /* AllSightsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSightsTableViewController.swift; sourceTree = "<group>"; };
 		D7837D16231EC17D00B6926C /* SightTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightTableViewCell.swift; sourceTree = "<group>"; };
 		D7837D18231ED32400B6926C /* SightMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightMapViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +46,8 @@
 		D7837D1E231ED3F100B6926C /* DetailSightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSightViewController.swift; sourceTree = "<group>"; };
 		D7837D20231ED68300B6926C /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
 		D7837D22231EDC9700B6926C /* SetPictureForSightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPictureForSightViewController.swift; sourceTree = "<group>"; };
+		D7966D34232110B800B99F73 /* FocusSightDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSightDelegate.swift; sourceTree = "<group>"; };
+		D7966D3623213D7500B99F73 /* SightChangeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightChangeDelegate.swift; sourceTree = "<group>"; };
 		D7E33243231FC75D0080801A /* SightTourInMelbourne.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SightTourInMelbourne.xcdatamodel; sourceTree = "<group>"; };
 		D7E33245231FC7F80080801A /* Sight+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sight+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D7E33246231FC7F80080801A /* Sight+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sight+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -61,6 +65,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D71BD6F82321AA0100463DB3 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				D74162F92321A9AF00425049 /* CoreDataController.swift */,
+				D74162FA2321A9AF00425049 /* DatabaseProtocol.swift */,
+				D74162F82321A9AF00425049 /* MulticastDelegate.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
 		D7837CE3231E8FF200B6926C = {
 			isa = PBXGroup;
 			children = (
@@ -81,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				D7E3324B23200B060080801A /* Assets.xcassets */,
-				D7837D0D231E956400B6926C /* DataBase */,
+				D71BD6F82321AA0100463DB3 /* DataBase */,
 				D7837D04231E903000B6926C /* CoreData */,
 				D7837CEF231E8FF200B6926C /* AppDelegate.swift */,
 				D7837D1A231ED36D00B6926C /* AddSightViewController.swift */,
@@ -95,6 +109,8 @@
 				D7837CF3231E8FF200B6926C /* Main.storyboard */,
 				D7837CFB231E8FF300B6926C /* LaunchScreen.storyboard */,
 				D7837CFE231E8FF300B6926C /* Info.plist */,
+				D7966D34232110B800B99F73 /* FocusSightDelegate.swift */,
+				D7966D3623213D7500B99F73 /* SightChangeDelegate.swift */,
 			);
 			path = SightTourInMelbourne;
 			sourceTree = "<group>";
@@ -107,16 +123,6 @@
 				D7E33242231FC75D0080801A /* SightTourInMelbourne.xcdatamodeld */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		D7837D0D231E956400B6926C /* DataBase */ = {
-			isa = PBXGroup;
-			children = (
-				D7837D0E231E95B500B6926C /* DatabaseProtocol.swift */,
-				D7837D10231E9BC200B6926C /* CoreDataController.swift */,
-				D7837D12231EA1B700B6926C /* MulticastDelegate.swift */,
-			);
-			path = DataBase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,17 +198,19 @@
 			files = (
 				D7837D1B231ED36D00B6926C /* AddSightViewController.swift in Sources */,
 				D7837D15231EC15C00B6926C /* AllSightsTableViewController.swift in Sources */,
+				D74162FB2321A9AF00425049 /* MulticastDelegate.swift in Sources */,
 				D7837D1D231ED3B500B6926C /* EditSightViewController.swift in Sources */,
-				D7837D0F231E95B500B6926C /* DatabaseProtocol.swift in Sources */,
 				D7837D19231ED32400B6926C /* SightMapViewController.swift in Sources */,
 				D7E33247231FC7F80080801A /* Sight+CoreDataClass.swift in Sources */,
 				D7E33244231FC75D0080801A /* SightTourInMelbourne.xcdatamodeld in Sources */,
 				D7837CF0231E8FF200B6926C /* AppDelegate.swift in Sources */,
 				D7837D21231ED68300B6926C /* LocationAnnotation.swift in Sources */,
 				D7837D17231EC17D00B6926C /* SightTableViewCell.swift in Sources */,
-				D7837D11231E9BC200B6926C /* CoreDataController.swift in Sources */,
+				D74162FC2321A9AF00425049 /* CoreDataController.swift in Sources */,
 				D7837D1F231ED3F100B6926C /* DetailSightViewController.swift in Sources */,
-				D7837D13231EA1B700B6926C /* MulticastDelegate.swift in Sources */,
+				D7966D3723213D7500B99F73 /* SightChangeDelegate.swift in Sources */,
+				D7966D35232110B800B99F73 /* FocusSightDelegate.swift in Sources */,
+				D74162FD2321A9AF00425049 /* DatabaseProtocol.swift in Sources */,
 				D7837D23231EDC9700B6926C /* SetPictureForSightViewController.swift in Sources */,
 				D7E33248231FC7F80080801A /* Sight+CoreDataProperties.swift in Sources */,
 			);
@@ -349,6 +357,7 @@
 		D7837D02231E8FF300B6926C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2DH6QWJ26;
 				INFOPLIST_FILE = SightTourInMelbourne/Info.plist;
@@ -359,13 +368,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.leo.SightTourInMelbourne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		D7837D03231E8FF300B6926C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2DH6QWJ26;
 				INFOPLIST_FILE = SightTourInMelbourne/Info.plist;
@@ -376,7 +386,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.leo.SightTourInMelbourne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

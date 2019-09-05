@@ -2,20 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>The Application need you allow to use the Photo Library</string>
-	<key>NSCameraUsageDescription</key>
-	<string>The Application need you allow to use the Camera</string>
-	<key>NSLocationUsageDescription</key>
-	<string>The Application need your location to support better service</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>The Application need your location to support better service</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>The Application need your location to support better service</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Melbourne Tour</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -30,6 +26,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>The Application need you allow to use the Camera</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>The Application need your location to support better service</string>
+	<key>NSLocationUsageDescription</key>
+	<string>The Application need your location to support better service</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The Application need your location to support better service</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>The Application need you allow to use the Photo Library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,8 +47,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
