@@ -33,6 +33,16 @@ class AddSightViewController: UIViewController, DatabaseListener, UIImagePickerC
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
 
     @IBAction func clearInput(_ sender: Any) {
         self.sightNameTextField.text = ""

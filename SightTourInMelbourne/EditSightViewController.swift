@@ -62,6 +62,11 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
 
     @IBAction func undoTheEdit(_ sender: Any) {
         self.sightNameTextField.text = editingSight?.sightName
