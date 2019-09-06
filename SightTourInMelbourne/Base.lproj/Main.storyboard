@@ -81,7 +81,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultIcon" translatesAutoresizingMaskIntoConstraints="NO" id="djF-I7-bHe">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultTypeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="djF-I7-bHe">
                                             <rect key="frame" x="16" y="8" width="78" height="83.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="djF-I7-bHe" secondAttribute="height" multiplier="100:107" id="cbI-dr-mKA"/>
@@ -448,6 +448,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="414" height="1100"/>
                     <connections>
+                        <outlet property="detailMapView" destination="ypZ-nM-7DN" id="B8u-vQ-hrA"/>
                         <outlet property="sightDescTextField" destination="Fvi-am-BLG" id="FtH-3k-4np"/>
                         <outlet property="sightNameTextField" destination="ux1-di-Nv2" id="WIJ-pd-8J0"/>
                         <outlet property="sightPhoto" destination="pwI-0x-tES" id="RhU-5m-IZH"/>
@@ -529,6 +530,7 @@
                                                 <state key="normal" title="Choose a Photo For Sight" image="cameraIcon"/>
                                                 <connections>
                                                     <action selector="choosePhoto:" destination="Ied-wS-MdG" eventType="touchUpInside" id="fBN-eM-y2E"/>
+                                                    <action selector="takePicture:" destination="Ied-wS-MdG" eventType="touchUpInside" id="JlS-GV-gTV"/>
                                                 </connections>
                                             </button>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6jG-Ua-wdI">
@@ -588,11 +590,14 @@
                         <viewLayoutGuide key="safeArea" id="l0R-6q-2x7"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add new Sight" id="Bs0-c6-PSz">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Gto-Q9-vzc">
-                            <connections>
-                                <segue destination="RW7-AL-5FH" kind="unwind" unwindAction="cancel:" id="0H9-oL-8ie"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="cancel" id="Gto-Q9-vzc">
+                                <connections>
+                                    <segue destination="RW7-AL-5FH" kind="unwind" unwindAction="cancel:" id="0H9-oL-8ie"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="camera" id="0cp-mc-ilm"/>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="done" id="Lxm-Xz-9jB">
                                 <connections>
@@ -618,9 +623,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bMn-u3-Jck" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="RW7-AL-5FH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1757" y="947"/>
+            <point key="canvasLocation" x="1775" y="947"/>
         </scene>
-        <!--Set Picture For Sight View Controller-->
+        <!--Pick A Picture-->
         <scene sceneID="ywa-DR-zuQ">
             <objects>
                 <viewController id="SQJ-ue-ltR" customClass="SetPictureForSightViewController" customModule="SightTourInMelbourne" customModuleProvider="target" sceneMemberID="viewController">
@@ -628,21 +633,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add pic for Sight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbi-PR-a5B">
-                                <rect key="frame" x="73" y="517" width="268" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newPhotoPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="DPu-7D-PdI">
+                                <rect key="frame" x="0.0" y="44" width="414" height="233"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DPu-7D-PdI" secondAttribute="height" multiplier="16:9" id="pjy-sd-LeC"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKX-ZV-DfX">
+                                <rect key="frame" x="16" y="307" width="89" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Take Picture"/>
+                                <connections>
+                                    <action selector="takePicture:" destination="SQJ-ue-ltR" eventType="touchUpInside" id="X9h-Sl-9w1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgd-sr-CdI">
+                                <rect key="frame" x="307" y="307" width="91" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Save &amp; Back"/>
+                                <connections>
+                                    <action selector="saveAndBack:" destination="SQJ-ue-ltR" eventType="touchUpInside" id="aSU-HL-1gw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vgd-sr-CdI" firstAttribute="top" secondItem="DPu-7D-PdI" secondAttribute="bottom" constant="30" id="1LS-CP-FVd"/>
+                            <constraint firstItem="DPu-7D-PdI" firstAttribute="top" secondItem="70W-VE-JFj" secondAttribute="top" id="7Ya-ab-fgL"/>
+                            <constraint firstItem="DPu-7D-PdI" firstAttribute="centerX" secondItem="6tM-aW-gG6" secondAttribute="centerX" id="Fpn-xh-d72"/>
+                            <constraint firstItem="HKX-ZV-DfX" firstAttribute="top" secondItem="DPu-7D-PdI" secondAttribute="bottom" constant="30" id="HcC-cS-8S0"/>
+                            <constraint firstItem="DPu-7D-PdI" firstAttribute="leading" secondItem="70W-VE-JFj" secondAttribute="leading" id="NLh-At-hwy"/>
+                            <constraint firstItem="HKX-ZV-DfX" firstAttribute="leading" secondItem="70W-VE-JFj" secondAttribute="leading" constant="16" id="R5I-Rt-1TX"/>
+                            <constraint firstItem="70W-VE-JFj" firstAttribute="trailing" secondItem="vgd-sr-CdI" secondAttribute="trailing" constant="16" id="VJ7-PW-tSh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="70W-VE-JFj"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Pick A Picture" id="vPv-3t-g9I"/>
+                    <connections>
+                        <outlet property="imageView" destination="DPu-7D-PdI" id="lBH-Li-pO9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4D4-QT-jDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2666.666666666667" y="904.6875"/>
+            <point key="canvasLocation" x="3614" y="947"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QSJ-Yj-YN7">
@@ -701,7 +734,7 @@
     </scenes>
     <resources>
         <image name="cameraIcon" width="512" height="512"/>
-        <image name="defaultIcon" width="120" height="120"/>
+        <image name="defaultTypeIcon" width="120" height="120"/>
         <image name="newPhotoPlaceHolder" width="512" height="414"/>
     </resources>
     <inferredMetricsTieBreakers>

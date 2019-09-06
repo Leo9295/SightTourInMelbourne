@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "EditSightViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):EditSightViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DetailSightViewController.save(_:):DetailSightViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(SightTourInMelbourne.Sight?)self.selectedSight">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -28,6 +28,8 @@ class DetailSightViewController: UIViewController, DatabaseListener {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
     }
     
     func onSightListChange(change: DatabaseChange, sights: [Sight]) {
@@ -68,7 +70,7 @@ class DetailSightViewController: UIViewController, DatabaseListener {
     @IBAction func save(_ unwindSegue: UIStoryboardSegue) {
         if let editSightViewChontroller = unwindSegue.source as? EditSightViewController {
             databaseController?.deleteSight(delSight: selectedSight!)
-            databaseController?.addSight(sightName: editSightViewChontroller.editedSight!.sightName!, sightDesc: editSightViewChontroller.editedSight!.sightDesc!, latitude: editSightViewChontroller.editedSight!.sightLatitude, longitude: editSightViewChontroller.editedSight!.sightLongitude, sightType: editSightViewChontroller.editedSight!.sightType!, image: editSightViewChontroller.sightImage!)
+            databaseController?.addSight(sightName: editSightViewChontroller.editedSightName!, sightDesc: editSightViewChontroller.editedSightDesc!, latitude: editSightViewChontroller.editedSightLatitude!, longitude: editSightViewChontroller.editedSightLongitude!, sightType: editSightViewChontroller.editedSightType!, image: editSightViewChontroller.editedSightImage!)
         }
     }
     // MARK: - Navigation

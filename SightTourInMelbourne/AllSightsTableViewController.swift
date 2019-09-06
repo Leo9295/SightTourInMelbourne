@@ -66,8 +66,6 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         default:
             cell.sightIconImage.image = UIImage(named: "other")
         }
-//        cell.sightNameLabel.text = currentSightList[indexPath.row].sightName
-//        cell.sightDescLabel.text = currentSightList[indexPath.row].sightDesc
 
         // Configure the cell...
 

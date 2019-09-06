@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MapKit
 
-class EditSightViewController: UIViewController, DatabaseListener, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditSightViewController: UIViewController, DatabaseListener, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate{
     
     weak var databaseController: DatabaseProtocol?
     var listenerType = ListenerType.sight
@@ -17,15 +18,25 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
     @IBOutlet weak var sightDescTextField: UITextField!
     @IBOutlet weak var sightTypeSegment: UISegmentedControl!
     @IBOutlet weak var sightPhoto: UIImageView!
+    @IBOutlet weak var detailMapView: MKMapView!
     
     var editingSight: Sight?
-    var editedSight: Sight?
-    var sightImage: UIImage?
+//    editedSightImagevar editedSight: Sight?
+    
+    var editedSightName: String?
+    var editedSightDesc: String?
+    var editedSightLatitude: Double?
+    var editedSightLongitude: Double?
+    var editedSightType: String?
+    var editedSightImage: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureReconizer:)))
+        gestureRecognizer.delegate = self
+        detailMapView.addGestureRecognizer(gestureRecognizer)
     }
     
     func onSightListChange(change: DatabaseChange, sights: [Sight]) {
@@ -40,12 +51,17 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
         self.sightTypeSegment.selectedSegmentIndex = sightTypeIndex(type: editingSight!.sightType!)
         self.sightPhoto.image = loadImageData(fileName: editingSight!.sightPhotoFileName!)
         
+        let center = LocationAnnotation(newTitle: "", newSubTitle: "", latitude: -37.8150783, longitude: 144.9636478)
+        self.foucsOn(annotation: center)
+        
+        
     }
 
     @IBAction func undoTheEdit(_ sender: Any) {
         self.sightNameTextField.text = editingSight?.sightName
         self.sightDescTextField.text = editingSight?.sightDesc
         self.sightTypeSegment.selectedSegmentIndex = sightTypeIndex(type: editingSight!.sightType!)
+        self.editedSightImage = self.sightPhoto.image
     }
     
     @IBAction func takePhotoButton(_ sender: Any) {
@@ -64,7 +80,7 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
             self.sightPhoto.image = pickedImage
-            self.sightImage = pickedImage
+            self.editedSightImage = pickedImage
         }
         dismiss(animated: true, completion: nil)
     }
@@ -75,8 +91,10 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        editedSight?.sightName = self.sightNameTextField.text
-        
+        self.editedSightName = self.sightNameTextField.text
+        self.editedSightDesc = self.sightDescTextField.text
+        let type = sightTypeName(index: self.sightTypeSegment.selectedSegmentIndex)
+        self.editedSightType = type
     }
  
     
@@ -93,6 +111,28 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
         default:
             return 4
         }
+    }
+    
+    func sightTypeName(index: Int) -> String {
+        switch index {
+        case 0:
+            return "Museum"
+        case 1:
+            return "Architecture"
+        case 2:
+            return "Art"
+        case 3:
+            return "Histroy"
+        default:
+            return "Other"
+        }
+    }
+    
+    func foucsOn(annotation: MKAnnotation){
+        detailMapView.selectAnnotation(annotation, animated: true)
+        
+        let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 700, longitudinalMeters: 700)
+        detailMapView.setRegion(detailMapView.regionThatFits(zoomRegion), animated: true)
     }
     
     func loadImageData(fileName: String) -> UIImage? {
@@ -118,6 +158,21 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
         let scan: Scanner = Scanner(string: string)
         var val:Int = 0
         return scan.scanInt(&val) && scan.isAtEnd
+    }
+    
+    // Cited from: https://www.raywenderlich.com/433-uigesturerecognizer-tutorial-getting-started#toc-anchor-007
+    @objc func handleTap(gestureReconizer: UILongPressGestureRecognizer) {
+        // remove pins on the map (clear the map)
+        detailMapView.removeAnnotations(detailMapView.annotations)
+        let location = gestureReconizer.location(in: detailMapView)
+        let coordinate = detailMapView.convert(location,toCoordinateFrom: detailMapView)
+        print("lat: \(coordinate.latitude)")
+        print("long: \(coordinate.longitude)")
+        self.editedSightLatitude = coordinate.latitude
+        self.editedSightLongitude = coordinate.longitude
+        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+        myAnnotation.coordinate = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
+        detailMapView.addAnnotation(myAnnotation)
     }
 
 }
