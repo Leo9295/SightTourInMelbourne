@@ -7,18 +7,30 @@
 //
 
 import UIKit
+import MapKit
 
-class AddSightViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddSightViewController: UIViewController, DatabaseListener, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    weak var databaseController: DatabaseProtocol?
+    var listenerType = ListenerType.sight
     
     @IBOutlet weak var sightNameTextField: UITextField!
     @IBOutlet weak var sightDescTextField: UITextField!
     @IBOutlet weak var sightTypeSegment: UISegmentedControl!
     @IBOutlet weak var sightPhotoImage: UIImageView!
+    @IBOutlet weak var detailMapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let center = LocationAnnotation(newTitle: "", newSubTitle: "", latitude: -37.8150783, longitude: 144.9636478)
+        self.foucsOn(annotation: center)
+        
+    }
+    
+    func onSightListChange(change: DatabaseChange, sights: [Sight]) {
+        
     }
     
 
@@ -28,10 +40,7 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         self.sightTypeSegment.selectedSegmentIndex = 4
         self.sightPhotoImage.image = UIImage(named: "newPhotoPlaceHolder")
     }
-    @IBAction func saveInput(_ sender: Any) {
-        
-    }
-   
+
     @IBAction func takePicture(_ sender: Any) {
         let controller = UIImagePickerController()
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -45,13 +54,21 @@ class AddSightViewController: UIViewController, UIImagePickerControllerDelegate,
         self.present(controller, animated: true, completion: nil)
     }
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
+        
      }
-     */
+    
+    
+    func foucsOn(annotation: MKAnnotation){
+        detailMapView.selectAnnotation(annotation, animated: true)
+        
+        let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 700, longitudinalMeters: 700)
+        detailMapView.setRegion(detailMapView.regionThatFits(zoomRegion), animated: true)
+    }
 }

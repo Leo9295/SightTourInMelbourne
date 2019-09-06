@@ -71,6 +71,7 @@ class DetailSightViewController: UIViewController, DatabaseListener {
         if let editSightViewChontroller = unwindSegue.source as? EditSightViewController {
             databaseController?.deleteSight(delSight: selectedSight!)
             databaseController?.addSight(sightName: editSightViewChontroller.editedSightName!, sightDesc: editSightViewChontroller.editedSightDesc!, latitude: editSightViewChontroller.editedSightLatitude!, longitude: editSightViewChontroller.editedSightLongitude!, sightType: editSightViewChontroller.editedSightType!, image: editSightViewChontroller.editedSightImage!)
+            self.selectedSight = databaseController?.fetchSightWithName(fetchedSightName: editSightViewChontroller.editedSightName!)
         }
     }
     // MARK: - Navigation

@@ -533,8 +533,8 @@
                                                     <action selector="takePicture:" destination="Ied-wS-MdG" eventType="touchUpInside" id="JlS-GV-gTV"/>
                                                 </connections>
                                             </button>
-                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6jG-Ua-wdI">
-                                                <rect key="frame" x="0.0" y="562" width="414" height="300"/>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="21q-wD-org">
+                                                <rect key="frame" x="0.0" y="562" width="414" height="250"/>
                                             </mapView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -542,28 +542,28 @@
                                             <constraint firstItem="xnH-Iq-mGE" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="3IA-cj-nTM"/>
                                             <constraint firstItem="xnH-Iq-mGE" firstAttribute="top" secondItem="OdB-Tu-ook" secondAttribute="bottom" constant="20" id="7EZ-2q-JNi"/>
                                             <constraint firstItem="hhs-yZ-Cf7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="20" symbolic="YES" id="7z1-GJ-ntN"/>
-                                            <constraint firstItem="6jG-Ua-wdI" firstAttribute="top" secondItem="1ML-qn-x9J" secondAttribute="bottom" constant="16" id="9TE-zo-Vxv"/>
                                             <constraint firstAttribute="trailing" secondItem="OdB-Tu-ook" secondAttribute="trailing" constant="16" id="B1h-Lw-esn"/>
-                                            <constraint firstItem="6jG-Ua-wdI" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" id="BmZ-De-jW6"/>
+                                            <constraint firstItem="21q-wD-org" firstAttribute="top" secondItem="1ML-qn-x9J" secondAttribute="bottom" constant="16" id="Dw4-3l-bCo"/>
                                             <constraint firstAttribute="trailing" secondItem="hhs-yZ-Cf7" secondAttribute="trailing" id="ErL-Yj-7C8"/>
                                             <constraint firstAttribute="trailing" secondItem="4eh-oS-RtK" secondAttribute="trailing" id="FVf-zy-Nvy"/>
+                                            <constraint firstAttribute="bottom" secondItem="21q-wD-org" secondAttribute="bottom" constant="88" id="Ig0-E1-qz8"/>
                                             <constraint firstAttribute="height" constant="900" id="JTd-CG-OsV"/>
                                             <constraint firstItem="jSU-I8-X20" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="K7f-bj-fat"/>
                                             <constraint firstItem="FxG-kP-lmc" firstAttribute="top" secondItem="9Sa-zJ-mqD" secondAttribute="top" constant="16" id="MQQ-nI-0fE"/>
                                             <constraint firstItem="0eI-cB-0WC" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="O5X-UO-lsE"/>
-                                            <constraint firstAttribute="bottom" secondItem="6jG-Ua-wdI" secondAttribute="bottom" constant="38" id="PRV-SN-tjJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="21q-wD-org" secondAttribute="trailing" id="OKE-tf-1vr"/>
                                             <constraint firstItem="4eh-oS-RtK" firstAttribute="top" secondItem="FxG-kP-lmc" secondAttribute="bottom" constant="20" id="QDq-gX-0vc"/>
                                             <constraint firstItem="0eI-cB-0WC" firstAttribute="top" secondItem="jSU-I8-X20" secondAttribute="bottom" constant="16" id="W5v-Bg-m0j"/>
                                             <constraint firstItem="jSU-I8-X20" firstAttribute="top" secondItem="xnH-Iq-mGE" secondAttribute="bottom" constant="20" id="WDo-qy-bec"/>
                                             <constraint firstItem="1ML-qn-x9J" firstAttribute="top" secondItem="0eI-cB-0WC" secondAttribute="bottom" constant="20" id="WxE-4i-dyJ"/>
                                             <constraint firstItem="FxG-kP-lmc" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="XNw-w2-Ybg"/>
                                             <constraint firstItem="1ML-qn-x9J" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="Xnh-OR-cju"/>
-                                            <constraint firstAttribute="trailing" secondItem="6jG-Ua-wdI" secondAttribute="trailing" id="ZrX-lE-YId"/>
                                             <constraint firstItem="4eh-oS-RtK" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" id="hAo-tg-UE0"/>
                                             <constraint firstAttribute="trailing" secondItem="FxG-kP-lmc" secondAttribute="trailing" constant="16" id="j1u-mu-Tqb"/>
                                             <constraint firstItem="OdB-Tu-ook" firstAttribute="top" secondItem="hhs-yZ-Cf7" secondAttribute="bottom" constant="10" id="jQ7-jK-2IN"/>
                                             <constraint firstItem="OdB-Tu-ook" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="l3J-RH-zdd"/>
                                             <constraint firstAttribute="trailing" secondItem="1ML-qn-x9J" secondAttribute="trailing" constant="16" id="lci-TM-bsO"/>
+                                            <constraint firstItem="21q-wD-org" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" id="mI6-ZQ-qtX"/>
                                             <constraint firstAttribute="trailing" secondItem="xnH-Iq-mGE" secondAttribute="trailing" constant="16" id="nBH-TH-bS2"/>
                                             <constraint firstAttribute="trailing" secondItem="0eI-cB-0WC" secondAttribute="trailing" constant="16" id="pWa-zu-Udo"/>
                                             <constraint firstAttribute="trailing" secondItem="jSU-I8-X20" secondAttribute="trailing" constant="16" id="sc3-8f-hLE"/>
@@ -590,14 +590,11 @@
                         <viewLayoutGuide key="safeArea" id="l0R-6q-2x7"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add new Sight" id="Bs0-c6-PSz">
-                        <leftBarButtonItems>
-                            <barButtonItem systemItem="cancel" id="Gto-Q9-vzc">
-                                <connections>
-                                    <segue destination="RW7-AL-5FH" kind="unwind" unwindAction="cancel:" id="0H9-oL-8ie"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="camera" id="0cp-mc-ilm"/>
-                        </leftBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Gto-Q9-vzc">
+                            <connections>
+                                <segue destination="RW7-AL-5FH" kind="unwind" unwindAction="cancel:" id="0H9-oL-8ie"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="done" id="Lxm-Xz-9jB">
                                 <connections>
@@ -614,6 +611,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="414" height="1100"/>
                     <connections>
+                        <outlet property="detailMapView" destination="21q-wD-org" id="a3t-c0-EJW"/>
                         <outlet property="sightDescTextField" destination="xnH-Iq-mGE" id="BXD-eP-8Hf"/>
                         <outlet property="sightNameTextField" destination="OdB-Tu-ook" id="XGh-dP-fq2"/>
                         <outlet property="sightPhotoImage" destination="4eh-oS-RtK" id="XxB-e0-AcB"/>
@@ -623,7 +621,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bMn-u3-Jck" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="RW7-AL-5FH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1775" y="947"/>
+            <point key="canvasLocation" x="1773.913043478261" y="946.875"/>
         </scene>
         <!--Pick A Picture-->
         <scene sceneID="ywa-DR-zuQ">

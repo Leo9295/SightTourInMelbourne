@@ -21,7 +21,6 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
     @IBOutlet weak var detailMapView: MKMapView!
     
     var editingSight: Sight?
-//    editedSightImagevar editedSight: Sight?
     
     var editedSightName: String?
     var editedSightDesc: String?
@@ -37,6 +36,22 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureReconizer:)))
         gestureRecognizer.delegate = self
         detailMapView.addGestureRecognizer(gestureRecognizer)
+        
+        self.sightNameTextField.text = editingSight?.sightName
+        self.sightDescTextField.text = editingSight?.sightDesc
+        self.sightTypeSegment.selectedSegmentIndex = sightTypeIndex(type: editingSight!.sightType!)
+        self.sightPhoto.image = loadImageData(fileName: editingSight!.sightPhotoFileName!)
+        
+        let center = LocationAnnotation(newTitle: "", newSubTitle: "", latitude: -37.8150783, longitude: 144.9636478)
+        self.foucsOn(annotation: center)
+        
+        // Set default
+        editedSightName = self.editingSight?.sightName
+        editedSightDesc = self.editingSight?.sightDesc
+        editedSightLatitude = self.editingSight?.sightLatitude
+        editedSightLongitude = self.editingSight?.sightLongitude
+        editedSightType = self.editingSight?.sightType
+        editedSightImage = self.loadImageData(fileName: self.editingSight!.sightPhotoFileName!)
     }
     
     func onSightListChange(change: DatabaseChange, sights: [Sight]) {
@@ -46,15 +61,6 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
-        self.sightNameTextField.text = editingSight?.sightName
-        self.sightDescTextField.text = editingSight?.sightDesc
-        self.sightTypeSegment.selectedSegmentIndex = sightTypeIndex(type: editingSight!.sightType!)
-        self.sightPhoto.image = loadImageData(fileName: editingSight!.sightPhotoFileName!)
-        
-        let center = LocationAnnotation(newTitle: "", newSubTitle: "", latitude: -37.8150783, longitude: 144.9636478)
-        self.foucsOn(annotation: center)
-        
-        
     }
 
     @IBAction func undoTheEdit(_ sender: Any) {
@@ -79,10 +85,10 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
-            self.sightPhoto.image = pickedImage
             self.editedSightImage = pickedImage
         }
         dismiss(animated: true, completion: nil)
+        self.sightPhoto.image = self.editedSightImage
     }
     
     // MARK: - Navigation

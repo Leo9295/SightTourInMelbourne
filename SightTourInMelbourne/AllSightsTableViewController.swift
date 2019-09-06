@@ -27,6 +27,7 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
