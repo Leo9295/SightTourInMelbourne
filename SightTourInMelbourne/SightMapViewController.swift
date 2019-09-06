@@ -29,9 +29,7 @@ class SightMapViewController: UIViewController, MKMapViewDelegate, DatabaseListe
         // Do any additional setup after loading the view.
         foucsOn(annotation: appDelegate.centralLocation)
     }
-    
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -98,9 +96,5 @@ class SightMapViewController: UIViewController, MKMapViewDelegate, DatabaseListe
     }
     
     @IBAction func cancel(_ unwindSegue: UIStoryboardSegue) {}
-    
-    @IBAction func save(_ unwindSegue: UIStoryboardSegue) {
-        
-    }
 
 }

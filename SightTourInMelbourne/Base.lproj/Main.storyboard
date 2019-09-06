@@ -436,7 +436,7 @@
                             <barButtonItem systemItem="save" id="cIr-PM-lfM">
                                 <connections>
                                     <action selector="saveTheEdit:" destination="nIE-J1-gqF" id="Qm5-N6-TI3"/>
-                                    <segue destination="qzu-Hr-Oko" kind="unwind" unwindAction="save:" id="dI9-D8-LXe"/>
+                                    <segue destination="qzu-Hr-Oko" kind="unwind" unwindAction="save:" id="c4n-lJ-69T"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="refresh" id="Qbj-rz-XcX">
@@ -520,31 +520,27 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhs-yZ-Cf7">
-                                                <rect key="frame" x="384" y="296" width="30" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="M8S-XV-p5t"/>
-                                                    <constraint firstAttribute="width" secondItem="hhs-yZ-Cf7" secondAttribute="height" multiplier="1:1" id="nzY-UB-kkh"/>
-                                                    <constraint firstAttribute="height" constant="30" id="oVa-jY-xWx"/>
-                                                </constraints>
-                                                <state key="normal" title="Choose a Photo For Sight" image="cameraIcon"/>
-                                                <connections>
-                                                    <action selector="choosePhoto:" destination="Ied-wS-MdG" eventType="touchUpInside" id="fBN-eM-y2E"/>
-                                                    <action selector="takePicture:" destination="Ied-wS-MdG" eventType="touchUpInside" id="JlS-GV-gTV"/>
-                                                </connections>
-                                            </button>
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="21q-wD-org">
                                                 <rect key="frame" x="0.0" y="562" width="414" height="250"/>
                                             </mapView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abw-x1-M27">
+                                                <rect key="frame" x="385" y="267" width="29" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Abw-x1-M27" secondAttribute="height" multiplier="1:1" id="udM-bN-Mab"/>
+                                                </constraints>
+                                                <state key="normal" title="Choose Photo for Sight" image="cameraIcon"/>
+                                                <connections>
+                                                    <action selector="choosePhotoButton:" destination="Ied-wS-MdG" eventType="touchUpInside" id="qyO-VV-SzX"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="xnH-Iq-mGE" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="3IA-cj-nTM"/>
                                             <constraint firstItem="xnH-Iq-mGE" firstAttribute="top" secondItem="OdB-Tu-ook" secondAttribute="bottom" constant="20" id="7EZ-2q-JNi"/>
-                                            <constraint firstItem="hhs-yZ-Cf7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="20" symbolic="YES" id="7z1-GJ-ntN"/>
                                             <constraint firstAttribute="trailing" secondItem="OdB-Tu-ook" secondAttribute="trailing" constant="16" id="B1h-Lw-esn"/>
+                                            <constraint firstItem="Abw-x1-M27" firstAttribute="leading" secondItem="4eh-oS-RtK" secondAttribute="leading" constant="385" id="CUy-W7-fuC"/>
                                             <constraint firstItem="21q-wD-org" firstAttribute="top" secondItem="1ML-qn-x9J" secondAttribute="bottom" constant="16" id="Dw4-3l-bCo"/>
-                                            <constraint firstAttribute="trailing" secondItem="hhs-yZ-Cf7" secondAttribute="trailing" id="ErL-Yj-7C8"/>
                                             <constraint firstAttribute="trailing" secondItem="4eh-oS-RtK" secondAttribute="trailing" id="FVf-zy-Nvy"/>
                                             <constraint firstAttribute="bottom" secondItem="21q-wD-org" secondAttribute="bottom" constant="88" id="Ig0-E1-qz8"/>
                                             <constraint firstAttribute="height" constant="900" id="JTd-CG-OsV"/>
@@ -553,21 +549,22 @@
                                             <constraint firstItem="0eI-cB-0WC" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="O5X-UO-lsE"/>
                                             <constraint firstAttribute="trailing" secondItem="21q-wD-org" secondAttribute="trailing" id="OKE-tf-1vr"/>
                                             <constraint firstItem="4eh-oS-RtK" firstAttribute="top" secondItem="FxG-kP-lmc" secondAttribute="bottom" constant="20" id="QDq-gX-0vc"/>
+                                            <constraint firstItem="OdB-Tu-ook" firstAttribute="bottom" secondItem="4eh-oS-RtK" secondAttribute="bottom" constant="70" id="UEs-e9-LFD"/>
                                             <constraint firstItem="0eI-cB-0WC" firstAttribute="top" secondItem="jSU-I8-X20" secondAttribute="bottom" constant="16" id="W5v-Bg-m0j"/>
+                                            <constraint firstItem="4eh-oS-RtK" firstAttribute="trailing" secondItem="Abw-x1-M27" secondAttribute="trailing" id="W7I-j8-KCP"/>
                                             <constraint firstItem="jSU-I8-X20" firstAttribute="top" secondItem="xnH-Iq-mGE" secondAttribute="bottom" constant="20" id="WDo-qy-bec"/>
                                             <constraint firstItem="1ML-qn-x9J" firstAttribute="top" secondItem="0eI-cB-0WC" secondAttribute="bottom" constant="20" id="WxE-4i-dyJ"/>
                                             <constraint firstItem="FxG-kP-lmc" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="XNw-w2-Ybg"/>
                                             <constraint firstItem="1ML-qn-x9J" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="Xnh-OR-cju"/>
+                                            <constraint firstItem="4eh-oS-RtK" firstAttribute="bottom" secondItem="Abw-x1-M27" secondAttribute="bottom" id="ZgU-CV-gbv"/>
                                             <constraint firstItem="4eh-oS-RtK" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" id="hAo-tg-UE0"/>
                                             <constraint firstAttribute="trailing" secondItem="FxG-kP-lmc" secondAttribute="trailing" constant="16" id="j1u-mu-Tqb"/>
-                                            <constraint firstItem="OdB-Tu-ook" firstAttribute="top" secondItem="hhs-yZ-Cf7" secondAttribute="bottom" constant="10" id="jQ7-jK-2IN"/>
                                             <constraint firstItem="OdB-Tu-ook" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" constant="16" id="l3J-RH-zdd"/>
                                             <constraint firstAttribute="trailing" secondItem="1ML-qn-x9J" secondAttribute="trailing" constant="16" id="lci-TM-bsO"/>
                                             <constraint firstItem="21q-wD-org" firstAttribute="leading" secondItem="9Sa-zJ-mqD" secondAttribute="leading" id="mI6-ZQ-qtX"/>
                                             <constraint firstAttribute="trailing" secondItem="xnH-Iq-mGE" secondAttribute="trailing" constant="16" id="nBH-TH-bS2"/>
                                             <constraint firstAttribute="trailing" secondItem="0eI-cB-0WC" secondAttribute="trailing" constant="16" id="pWa-zu-Udo"/>
                                             <constraint firstAttribute="trailing" secondItem="jSU-I8-X20" secondAttribute="trailing" constant="16" id="sc3-8f-hLE"/>
-                                            <constraint firstItem="4eh-oS-RtK" firstAttribute="bottom" secondItem="hhs-yZ-Cf7" secondAttribute="bottom" constant="-30" id="yaz-Fq-Fs8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -598,8 +595,7 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="done" id="Lxm-Xz-9jB">
                                 <connections>
-                                    <action selector="saveInput:" destination="Ied-wS-MdG" id="yPX-GX-FCZ"/>
-                                    <segue destination="RW7-AL-5FH" kind="unwind" unwindAction="save:" id="tr6-2u-Av2"/>
+                                    <action selector="saveNewSight:" destination="Ied-wS-MdG" id="jJ4-aO-nKc"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="trash" id="aiT-C5-cZ1">
