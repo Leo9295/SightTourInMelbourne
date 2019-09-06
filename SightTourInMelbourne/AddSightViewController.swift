@@ -102,9 +102,6 @@ class AddSightViewController: UIViewController, DatabaseListener, UIImagePickerC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
-        let alertController = UIAlertController(title: "Alert", message: "hhhhhh", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
     }
     
     func displayAlertMessage(_ message: String, _ title: String){

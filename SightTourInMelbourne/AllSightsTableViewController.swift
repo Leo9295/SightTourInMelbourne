@@ -11,10 +11,13 @@ import UIKit
 class AllSightsTableViewController: UITableViewController, DatabaseListener {
     
     var currentSightList: [Sight] = []
+    var filteredSights: [Sight] = []
     weak var databaseController: DatabaseProtocol?
     var listenerType = ListenerType.sight
     
     weak var focusSightDelegate: FocusSightDelegate?
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,14 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         // Get the database controller once from the App Delegate
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
+        
+        // Search Bar
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Sights"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,25 +58,45 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if isFiltering() {
+            return filteredSights.count
+        }
         return currentSightList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SightViewCell", for: indexPath) as! SightTableViewCell
-        
-        cell.sightNameLabel.text = currentSightList[indexPath.row].sightName
-        cell.sightDescLabel.text = currentSightList[indexPath.row].sightDesc
-        switch currentSightList[indexPath.row].sightType {
-        case "Museum":
-            cell.sightIconImage.image = UIImage(named: "museum")
-        case "Architecture":
-            cell.sightIconImage.image = UIImage(named: "architecture")
-        case "Art":
-            cell.sightIconImage.image = UIImage(named: "art")
-        case "Histroy":
-            cell.sightIconImage.image = UIImage(named: "history")
-        default:
-            cell.sightIconImage.image = UIImage(named: "other")
+
+        if isFiltering() {
+            cell.sightNameLabel.text = filteredSights[indexPath.row].sightName
+            cell.sightDescLabel.text = filteredSights[indexPath.row].sightDesc
+            switch filteredSights[indexPath.row].sightType {
+            case "Museum":
+                cell.sightIconImage.image = UIImage(named: "museum")
+            case "Architecture":
+                cell.sightIconImage.image = UIImage(named: "architecture")
+            case "Art":
+                cell.sightIconImage.image = UIImage(named: "art")
+            case "Histroy":
+                cell.sightIconImage.image = UIImage(named: "history")
+            default:
+                cell.sightIconImage.image = UIImage(named: "other")
+            }
+        } else {
+            cell.sightNameLabel.text = currentSightList[indexPath.row].sightName
+            cell.sightDescLabel.text = currentSightList[indexPath.row].sightDesc
+            switch currentSightList[indexPath.row].sightType {
+            case "Museum":
+                cell.sightIconImage.image = UIImage(named: "museum")
+            case "Architecture":
+                cell.sightIconImage.image = UIImage(named: "architecture")
+            case "Art":
+                cell.sightIconImage.image = UIImage(named: "art")
+            case "Histroy":
+                cell.sightIconImage.image = UIImage(named: "history")
+            default:
+                cell.sightIconImage.image = UIImage(named: "other")
+            }
         }
 
         // Configure the cell...
@@ -117,7 +148,24 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
         
         self.performSegue(withIdentifier: "ShowDetailViewSegue", sender: selectedSight)
     }
+    
+    // Searching bar functions
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
 
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredSights = currentSightList.filter({( sight : Sight) -> Bool in
+            return sight.sightName!.contains(searchText)
+        })
+        
+        tableView.reloadData()
+    }
     
     // MARK: - Navigation
 
@@ -135,12 +183,18 @@ class AllSightsTableViewController: UITableViewController, DatabaseListener {
     
     @IBAction func cancel(_ unwindSegue: UIStoryboardSegue) {}
     
-    @IBAction func save(_ unwindSegue: UIStoryboardSegue) {
-        
-    }
+    @IBAction func save(_ unwindSegue: UIStoryboardSegue) {}
         
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
 }
+
+extension AllSightsTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+

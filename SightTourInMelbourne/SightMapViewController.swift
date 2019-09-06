@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SightMapViewController: UIViewController, MKMapViewDelegate, DatabaseListener, FocusSightDelegate{
+class SightMapViewController: UIViewController, MKMapViewDelegate, DatabaseListener, FocusSightDelegate, CLLocationManagerDelegate{
     
     var currentList: [Sight] = []
     weak var databaseController: DatabaseProtocol?
@@ -19,7 +19,7 @@ class SightMapViewController: UIViewController, MKMapViewDelegate, DatabaseListe
     @IBOutlet weak var mapView: MKMapView!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +51,9 @@ class SightMapViewController: UIViewController, MKMapViewDelegate, DatabaseListe
         for sight in currentList{
             let location = changeSightToAnnotation(sight: sight)
             mapView.addAnnotation(location)
+            let geoLocation = CLCircularRegion(center: location.coordinate, radius: 300, identifier: location.title!)
+            geoLocation.notifyOnExit = true
+            appDelegate.locationManager.startMonitoring(for: geoLocation)
         }
     }
     
@@ -86,6 +89,10 @@ class SightMapViewController: UIViewController, MKMapViewDelegate, DatabaseListe
 //
 //    }
     
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        displayAlertMessage("Movement Detected!", "You have left ")
+    }
+    
     func onSightListChange(change: DatabaseChange, sights: [Sight]) {
         currentList = sights
     }
@@ -93,6 +100,12 @@ class SightMapViewController: UIViewController, MKMapViewDelegate, DatabaseListe
     func changeSightToAnnotation(sight: Sight) -> LocationAnnotation {
         let location = LocationAnnotation(newTitle: sight.sightName!, newSubTitle: sight.sightType!, latitude: sight.sightLatitude, longitude: sight.sightLongitude)
         return location
+    }
+    
+    func displayAlertMessage(_ message: String, _ title: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func cancel(_ unwindSegue: UIStoryboardSegue) {}

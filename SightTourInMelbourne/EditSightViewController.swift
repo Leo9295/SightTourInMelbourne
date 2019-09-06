@@ -96,18 +96,32 @@ class EditSightViewController: UIViewController, DatabaseListener, UIImagePicker
         self.sightPhoto.image = self.editedSightImage
     }
     
+//    func validationMethod() -> Bool {
+//        displayAlertMessage("Test", "testeset")
+//
+////        self.navigationController!.dismiss(animated: true, completion: nil)
+//        return false
+//    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        self.editedSightName = self.sightNameTextField.text
-        self.editedSightDesc = self.sightDescTextField.text
-        let type = sightTypeName(index: self.sightTypeSegment.selectedSegmentIndex)
-        self.editedSightType = type
+//        if validationMethod() {
+            self.editedSightName = self.sightNameTextField.text
+            self.editedSightDesc = self.sightDescTextField.text
+            let type = sightTypeName(index: self.sightTypeSegment.selectedSegmentIndex)
+            self.editedSightType = type
+//        }
     }
- 
+    
+    func displayAlertMessage(_ message: String, _ title: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     func sightTypeIndex(type: String) -> Int {
         switch type {

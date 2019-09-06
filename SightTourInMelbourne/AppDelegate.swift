@@ -12,13 +12,12 @@ import CoreLocation
 import MapKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate{
 
     var window: UIWindow?
     var databaseController: DatabaseProtocol?
     var centralLocation =  LocationAnnotation(newTitle: "CBD", newSubTitle: "", latitude: -37.8150783, longitude: 144.9636478)
     var locationManager: CLLocationManager = CLLocationManager()
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -100,6 +99,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             }
         }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+//        let alert = UIAlertController(title: "Movement Detected!", message: "You have left this area", preferredStyle: UIAlertController.Style.alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+        
+        print("aaaaa")
+    }
+
 
 }
 
